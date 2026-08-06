@@ -6,47 +6,25 @@ on:
       - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  contents: write
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Prepare clean site folder
-        run: |
-          mkdir -p _site
-          rsync -a \
-            --exclude='_site' \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='.claude' \
-            --exclude='.DS_Store' \
-            --exclude='**/.DS_Store' \
-            . _site/
+      - name: Add .nojekyll
+        run: touch .nojekyll
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: '_site'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          exclude_assets: '.git,.github,.claude,.DS_Store,**/.DS_Store'
