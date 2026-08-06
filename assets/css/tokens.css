@@ -1,0 +1,43 @@
+:root {
+  /* Colors */
+  --c-primary:     #FFC83D;
+  --c-secondary:   #FFE7A3;
+  --c-surface:     rgba(255,255,255,0.80);
+  --c-bg:          #FFFDF8;
+  --c-text:        #1A1A1A;
+  --c-text-muted:  #666666;
+  --c-accent-pink: #FDB7A8;
+  --c-accent-lav:  #E7C3FF;
+  --c-accent-blue: #BDE7FF;
+
+  /* Gradient */
+  --g-hero: linear-gradient(160deg, #FFD95A 0%, #FFC86B 30%, #FDB7A8 65%, #E7C3FF 85%, #BDE7FF 100%);
+
+  /* Glass */
+  --glass-bg:     rgba(255,255,255,0.72);
+  --glass-blur:   blur(18px);
+  --glass-border: 1px solid rgba(255,255,255,0.6);
+
+  /* Shadow */
+  --shadow-card:  0 20px 50px rgba(0,0,0,0.08);
+  --shadow-hover: 0 30px 60px rgba(0,0,0,0.14);
+
+  /* Radius */
+  --r-btn:   999px;
+  --r-card:  30px;
+  --r-img:   22px;
+  --r-sm:    12px;
+
+  /* Type scale */
+  --fs-hero:  clamp(52px, 8vw, 88px);
+  --fs-h1:    clamp(36px, 5vw, 56px);
+  --fs-h2:    clamp(24px, 3vw, 36px);
+  --fs-h3:    20px;
+  --fs-body:  16px;
+  --fs-sm:    14px;
+  --fs-xs:    12px;
+
+  /* Spacing */
+  --section-gap: clamp(80px, 10vw, 140px);
+  --container:   min(1280px, 90vw);
+}
