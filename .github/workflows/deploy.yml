@@ -28,4 +28,4 @@ jobs:
           publish_dir: .
           publish_branch: gh-pages
           force_orphan: true
-          exclude_assets: '.git,.github,.claude,.DS_Store,**/.DS_Store'
+          exclude_assets: '.github,.claude,.DS_Store,**/.DS_Store'
