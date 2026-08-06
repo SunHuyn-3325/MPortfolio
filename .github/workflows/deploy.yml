@@ -6,19 +6,10 @@ on:
       - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  contents: write
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -27,14 +18,20 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Prepare site files
+        run: |
+          mkdir -p _site
+          rsync -av --exclude='_site' \
+                    --exclude='.git' \
+                    --exclude='.github' \
+                    --exclude='.claude' \
+                    --exclude='.DS_Store' \
+                    --exclude='*.DS_Store' \
+                    . _site/
 
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: '.'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          branch: gh-pages
+          folder: _site
+          clean: true
